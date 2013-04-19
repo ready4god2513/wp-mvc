@@ -73,13 +73,18 @@ class MvcAdminLoader extends MvcLoader {
 			}
 			
 			$processed_pages = $this->process_admin_pages($controller_name, $pages);
-			
+
 			$hide_menu = isset($pages['hide_menu']) ? $pages['hide_menu'] : false;
 					
 			$controller_titleized = MvcInflector::titleize($controller_name);
 			$admin_controller_name = 'admin_'.$controller_name;
 			$top_level_handle = 'mvc_'.$controller_name;
-		
+
+			$menu_title = $controller_titleized;
+			if(isset($pages['label'])){
+				$menu_title = $pages['label'];
+			}
+	
 			$method = $admin_controller_name.'_index';
 			$this->dispatcher->{$method} = create_function('', 'MvcDispatcher::dispatch(array("controller" => "'.$admin_controller_name.'", "action" => "index"));');
 			add_menu_page(
@@ -93,14 +98,21 @@ class MvcAdminLoader extends MvcLoader {
 			);
 		
 			foreach ($processed_pages as $key => $admin_page) {
+
+				if(isset($admin_page['controller_name'])){
+					$admin_controller_name = 'admin_'.$admin_page['controller_name'];
+				}
 			
 				$method = $admin_controller_name.'_'.$admin_page['action'];
-			
 				if (!method_exists($this->dispatcher, $method)) {
 					$this->dispatcher->{$method} = create_function('', 'MvcDispatcher::dispatch(array("controller" => "'.$admin_controller_name.'", "action" => "'.$admin_page['action'].'"));');
 				}
 			
 				$page_handle = $top_level_handle.'-'.$key;
+				if(isset($admin_page['page_handle'])){
+					$page_handle = $admin_page['page_handle'];
+				}
+
 				$parent_slug = empty($admin_page['parent_slug']) ? $top_level_handle : $admin_page['parent_slug'];
 			
 				add_submenu_page(
