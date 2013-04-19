@@ -88,8 +88,8 @@ class MvcAdminLoader extends MvcLoader {
 			$method = $admin_controller_name.'_index';
 			$this->dispatcher->{$method} = create_function('', 'MvcDispatcher::dispatch(array("controller" => "'.$admin_controller_name.'", "action" => "index"));');
 			add_menu_page(
-				$controller_titleized,
-				$controller_titleized,
+				$menu_title,
+				$menu_title,
 				'administrator',
 				$top_level_handle,
 				array($this->dispatcher, $method),
