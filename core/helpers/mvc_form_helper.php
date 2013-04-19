@@ -30,9 +30,13 @@ class MvcFormHelper extends MvcHelper {
 		}
 		return $html;
 	}
-	
-	public function end($label='Submit') {
-		$html = '<div><input type="submit" value="'.$this->esc_attr($label).'" /></div>';
+	//added ability to enter class
+	public function end($label='Submit',$class=null) {
+		$class_attribute = null;
+		if($class){
+			$class_attribute = ' class="'.$class.'"';
+		}
+		$html = '<div><input type="submit" value="'.$this->esc_attr($label).'"'.$class_attribute.' /></div>';
 		$html .= '</form>';
 		return $html;
 	}
