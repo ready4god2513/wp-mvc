@@ -42,6 +42,7 @@ class MvcInflector {
 			'genie' => 'genies',
 			'genus' => 'genera',
 			'graffito' => 'graffiti',
+			'hero' => 'heroes',
 			'hoof' => 'hoofs',
 			'loaf' => 'loaves',
 			'man' => 'men',
