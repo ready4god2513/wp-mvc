@@ -1,7 +1,7 @@
 <?php
 
 $wordpress_path = getenv('WPMVC_WORDPRESS_PATH');
-$wordpress_path = $wordpress_path ? rtrim($wordpress_path, '/').'/' : dirname(__FILE__).'/../../../../';
+$wordpress_path = $wordpress_path ? rtrim($wordpress_path, '/').'/' : dirname(__FILE__).'/../../../../wp/';
 
 //needed for running on command line
 if(!isset($_SERVER['HTTP_HOST'])){

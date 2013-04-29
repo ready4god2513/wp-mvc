@@ -45,7 +45,7 @@ class MvcDatabaseAdapter {
 		$clauses = array(
 			'select' => 'SELECT '.$this->get_select_sql($options),
 			'from' => 'FROM '.$this->get_table_reference_sql($options),
-			'joins' => $this->get_joins_sql($options),
+			'joins' => MvcModel::process_table_name($this->get_joins_sql($options)),
 			'where' => $this->get_where_sql($options),
 			'group' => $this->get_group_sql($options),
 			'order' => $this->get_order_sql($options),
@@ -72,6 +72,7 @@ class MvcDatabaseAdapter {
 		if (isset($joins['table'])) {
 			$joins = array($joins);
 		}
+		
 		foreach ($joins as $join) {
 			$type = empty($join['type']) ? 'JOIN' : $join['type'];
 			$clauses[] = $type.' '.$join['table'].' '.$join['alias'].' ON '.$join['on'];
