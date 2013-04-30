@@ -63,6 +63,7 @@ abstract class MvcLoader {
 			'models/wp_models/mvc_post_meta',
 			'models/wp_models/mvc_user',
 			'helpers/mvc_helper',
+			'helpers/mvc_renderer',
 			'helpers/mvc_form_tags_helper',
 			'helpers/mvc_form_helper',
 			'helpers/mvc_html_helper',

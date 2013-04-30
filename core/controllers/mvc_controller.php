@@ -251,18 +251,24 @@ class MvcController {
 		return $string;
 	}
 	
-	protected function include_view($path, $view_vars=array()) {
-		extract($view_vars);
+	protected function include_view($path, $view_vars=array()) 
+	{
+		$engine = "mustache";
 		$path = preg_replace('/^admin_([^\/]+)/', 'admin/$1', $path);
-		$filepath = $this->file_includer->find_first_app_file_or_core_file('views/'.$path.'.php');
+		$filepath = $this->file_includer->find_first_app_file_or_core_file('views/'.$path.'.' . $engine);
 		if (!$filepath) {
 			$path = preg_replace('/admin\/(?!layouts)([\w_]+)/', 'admin', $path);
-			$filepath = $this->file_includer->find_first_app_file_or_core_file('views/'.$path.'.php');
+			$filepath = $this->file_includer->find_first_app_file_or_core_file('views/'.$path.'.' . $engine);
 			if (!$filepath) {
 				MvcError::warning('View "'.$path.'" not found.');
 			}
 		}
-		require $filepath;
+
+		$path = explode("/", $filepath);
+		$file = array_pop($path);
+		$path = implode("/", $path);
+		$jc = new MvcRenderer($view_vars, $path);
+		$jc->render($file);
 	}
 	
 	private function set_view_var($key, $value) {
