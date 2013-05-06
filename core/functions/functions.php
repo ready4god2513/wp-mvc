@@ -6,9 +6,9 @@ function mvc_plugin_app_path($plugin) {
 }
 
 function mvc_plugin_app_url($plugin) {
-	$abspath = rtrim(WP_CONTENT_URL, '/').'/';
-	$site_url = rtrim(content_url(), '/').'/';
-	$url = str_replace($abspath, $site_url, mvc_plugin_app_path($plugin));
+	$content_path = rtrim(WP_CONTENT_DIR, '/').'/';
+	$content_url = rtrim(content_url(), '/').'/';
+	$url = str_replace($content_path, $content_url, mvc_plugin_app_path($plugin));
 	return $url;
 }
 
