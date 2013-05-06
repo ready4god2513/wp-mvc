@@ -6,8 +6,8 @@ function mvc_plugin_app_path($plugin) {
 }
 
 function mvc_plugin_app_url($plugin) {
-	$abspath = rtrim(ABSPATH, '/').'/';
-	$site_url = rtrim(site_url(), '/').'/';
+	$abspath = rtrim(WP_CONTENT_URL, '/').'/';
+	$site_url = rtrim(content_url(), '/').'/';
 	$url = str_replace($abspath, $site_url, mvc_plugin_app_path($plugin));
 	return $url;
 }
