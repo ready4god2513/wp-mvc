@@ -30,9 +30,13 @@ class MvcFormHelper extends MvcHelper {
 		}
 		return $html;
 	}
-	
-	public function end($label='Submit') {
-		$html = '<div><input type="submit" value="'.$this->esc_attr($label).'" /></div>';
+	//added ability to enter class
+	public function end($label='Submit',$class=null) {
+		$class_attribute = null;
+		if($class){
+			$class_attribute = ' class="'.$class.'"';
+		}
+		$html = '<div><input type="submit" value="'.$this->esc_attr($label).'"'.$class_attribute.' /></div>';
 		$html .= '</form>';
 		return $html;
 	}
@@ -140,7 +144,7 @@ class MvcFormHelper extends MvcHelper {
 		
 		$options = array_merge($defaults, $options);
 		$options['options'] = empty($options['options']) ? array() : $options['options'];
-		$options['name'] = $field_name;
+		$options['name'] = $this->input_name($field_name);
 		$attributes_html = self::attributes_html($options, 'select');
 		$html = '<select'.$attributes_html.'>';
 		if ($options['empty']) {
@@ -157,6 +161,16 @@ class MvcFormHelper extends MvcHelper {
 		}
 		$html .= '</select>';
 		return $html;
+	}
+	
+	public function label($field_name, $options){
+		$defaults = array(
+			'id' => $this->input_id($field_name),
+			'label' => MvcInflector::titleize($field_name)
+		);
+		$options = array_merge($defaults,$options);
+
+		return '<label for="'.$options['id'].'">'.$options['label'].'</label>';
 	}
 	
 	public function button($text, $options=array()) {

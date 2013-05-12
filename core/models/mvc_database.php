@@ -3,12 +3,12 @@
 class MvcDatabase {
 
 	private $wpdb;
-	private $debug = true;
+	private $debugDB = true;
 
 	function __construct() {
 		global $wpdb;
 		$this->wpdb = $wpdb;
-		$this->debug = MvcConfiguration::get('Debug');
+		$this->debugDB = MvcConfiguration::get('DebugDB');
 	}
 	
 	public function get_results($string, $output_type=OBJECT) {
@@ -42,8 +42,8 @@ class MvcDatabase {
 	}
 	
 	private function add_to_log($string) {
-		if ($this->debug) {
-			echo '<pre>'.$string.'</pre>';
+		if ($this->debugDB) {
+			MvcError::notice("[DB]: ".$string);
 		}
 	}
 

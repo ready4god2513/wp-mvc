@@ -30,13 +30,7 @@ class MvcError {
 			echo '-- '.$type_name.': '.$message."\n".'   (Thrown on line '.$line.' of '.$file.")\n";
 		
 		} else {
-		
-			echo '
-				<br />
-				<strong>[MVC] '.$type_name.'</strong>: '.$message.'
-				<br />
-				Thrown on line '.$line.' of '.$file.' <br />';
-				
+			error_log("[MVC] ".$type_name.": ".$message." Thrown on line ".$line." of ".$file."\n");
 		}
 	
 	}
