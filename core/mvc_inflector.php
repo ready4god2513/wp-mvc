@@ -18,7 +18,7 @@ class MvcInflector {
 			'/person$/i' => 'people',
 			'/man$/i' => 'men',
 			'/child$/i' => 'children',
-			'/(buffal|tomat)o$/i' => '\1\2oes',
+			'/(buffal|tomat|her)o$/i' => '\1\2oes',
 			'/(alumn|bacill|cact|foc|fung|nucle|radi|stimul|syllab|termin|vir)us$/i' => '\1i',
 			'/us$/i' => 'uses',
 			'/alias$/i' => 'aliases',
@@ -42,7 +42,6 @@ class MvcInflector {
 			'genie' => 'genies',
 			'genus' => 'genera',
 			'graffito' => 'graffiti',
-			'hero' => 'heroes',
 			'hoof' => 'hoofs',
 			'loaf' => 'loaves',
 			'man' => 'men',
@@ -100,7 +99,8 @@ class MvcInflector {
 		),
 		'irregular' => array(
 			'waves' => 'wave',
-			'curves' => 'curve'
+			'curves' => 'curve',
+			'heroes' => 'hero'
 		)
 	);
 
@@ -156,7 +156,7 @@ class MvcInflector {
 	
 	public static function tableize($string) {
 		$string = MvcInflector::underscore($string);
-		$string = MvcInflector::pluralize($string);
+		$string = MvcInflector::pluralize($string);		
 		return $string;
 	}
 	
