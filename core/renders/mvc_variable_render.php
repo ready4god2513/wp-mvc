@@ -14,5 +14,3 @@ class MvcVariableRender extends MvcRender{
 	}
 
 }
-
-?>
