@@ -6,9 +6,9 @@
 **/
 
 
-class MvcMustacheRender extends MvcRender{
+class MvcMustacheRender extends MvcRender {
 
-	function render($filepath,$view_vars){
+	function render($filepath, $view_vars){
 		$mustache_options = array(
 			'loader' => new Mustache_Loader_FilesystemLoader(dirname($filepath))
 		);
@@ -21,5 +21,3 @@ class MvcMustacheRender extends MvcRender{
 	}
 
 }
-
-?>

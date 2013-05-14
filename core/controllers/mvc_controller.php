@@ -267,13 +267,13 @@ class MvcController {
 		$plugin_engine = MvcConfiguration::get('render_engine');
 		$get_engine = MvcInflector::underscore($plugin_engine);
 		if($get_engine){
-			$engine = new $get_engine;
+			$engine = new $get_engine($this);
 		}
 		else{
-			$engine = new MvcVariableRender;
+			$engine = new MvcVariableRender($this);
 		}
 
-		$engine->render($filepath,$view_vars);
+		$engine->render($filepath, $view_vars);
 	}
 
 	private function set_view_var($key, $value) {
