@@ -23,10 +23,18 @@ class MvcRender {
   }
 
 
+  public function __get($name)
+  {
+    return $this->controller->$name;
+  }
+
+
   /**
    * Attempt to check to see if the called method is a method on the controller.
    * The way that wpmvc calls into the renderer means that the controller is no longer
    * the main object.
+   * $this->do_something($args);
+   * $this->form->create($args);
    *
    * @return void
    * @author 
@@ -35,12 +43,14 @@ class MvcRender {
   {
     try
     {
-      call_user_func_array(array($this->controller, $method), $args);
+      $res = call_user_func_array(array($this->controller, $method), $args);
     }
     catch(Exception $e)
     {
-      parent::__call($method, $args);
+      $res = parent::__call($method, $args);
     }
+
+    return $res;
   }
 
 }
